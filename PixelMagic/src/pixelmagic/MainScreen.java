@@ -45,7 +45,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        save = new javax.swing.JButton();
         OpenButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         brightnessSlider = new javax.swing.JSlider();
@@ -75,7 +75,12 @@ public class MainScreen extends javax.swing.JFrame {
 
         jButton2.setText("Steganography");
 
-        jButton3.setText("Save");
+        save.setText("Save");
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
 
         OpenButton.setText("OPEN");
         OpenButton.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +171,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(OpenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -178,7 +183,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(OpenButton, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,6 +306,20 @@ public class MainScreen extends javax.swing.JFrame {
         ImageIcon imageIcon = new ImageIcon(outputPreview);
         imageLabel.setIcon(imageIcon);
     }//GEN-LAST:event_gammaOKActionPerformed
+
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        JFileChooser chooser = new JFileChooser();
+       int rVal = chooser.showSaveDialog(this);
+       if(rVal == JFileChooser.APPROVE_OPTION )
+        try{
+            File outputImage = chooser.getSelectedFile();
+            ImageIO.write(output, "png", outputImage);
+            imageSaved = true;
+       }
+       catch(IOException e){
+           e.printStackTrace();
+       }
+    }//GEN-LAST:event_saveActionPerformed
     public static void main(String args[]) {
          
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -344,7 +363,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel imageLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -352,6 +370,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JSlider jSlider4;
+    private javax.swing.JButton save;
     private javax.swing.JButton sharpnessOK;
     private javax.swing.JSlider sharpnessSlider;
     // End of variables declaration//GEN-END:variables
