@@ -63,6 +63,7 @@ public class MainScreen extends javax.swing.JFrame {
         gammaSlider = new javax.swing.JSlider();
         gammaOK = new javax.swing.JButton();
         imageLabel = new javax.swing.JLabel();
+        redeyeRemoveButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,13 +137,20 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        redeyeRemoveButton.setText("Red Eye Removal");
+        redeyeRemoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                redeyeRemoveButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(gammaSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,7 +180,8 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(redeyeRemoveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -226,7 +235,9 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
                                 .addComponent(gammaSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(gammaOK)))
+                            .addComponent(gammaOK))
+                        .addGap(18, 18, 18)
+                        .addComponent(redeyeRemoveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -330,6 +341,19 @@ public class MainScreen extends javax.swing.JFrame {
         SteganographyUI steganographyui = new SteganographyUI();
         steganographyui.show();
     }//GEN-LAST:event_steganographyButtonActionPerformed
+
+    private void redeyeRemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redeyeRemoveButtonActionPerformed
+        if(!imageEdited){
+            output = FaceDetection.removeRedEye(userImage);
+            imageEdited = true;
+        }
+        else{
+            output = FaceDetection.removeRedEye(output);
+        }
+        outputPreview = Utility.resize(output, 640, 480);
+        ImageIcon imageIcon = new ImageIcon(outputPreview);
+        imageLabel.setIcon(imageIcon);
+    }//GEN-LAST:event_redeyeRemoveButtonActionPerformed
     public static void main(String args[]) {
          
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -379,6 +403,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JSlider jSlider4;
+    private javax.swing.JButton redeyeRemoveButton;
     private javax.swing.JButton save;
     private javax.swing.JButton sharpnessOK;
     private javax.swing.JSlider sharpnessSlider;
