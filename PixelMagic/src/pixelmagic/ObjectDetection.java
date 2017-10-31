@@ -1,0 +1,65 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package pixelmagic;
+
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfRect;
+import org.opencv.core.Point;
+import org.opencv.core.Range;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
+import static org.opencv.imgproc.Imgproc.rectangle;
+import org.opencv.objdetect.CascadeClassifier;
+/**
+ *
+ * @author mahe
+ */
+public class ObjectDetection {
+    public static BufferedImage boxing(BufferedImage image)
+    {
+      Mat imageMat = Utility.bufferedToMat(image);
+        Imgproc.cvtColor(imageMat, imageMat, Imgproc.COLOR_RGB2BGR);
+        CascadeClassifier eyeDetector = new CascadeClassifier("classifierWallClock.xml");
+        MatOfRect eyeDetections = new MatOfRect();
+        eyeDetector.detectMultiScale(imageMat, eyeDetections);
+        
+        
+        for(Rect rect : eyeDetections.toArray())
+        {
+            Imgproc.rectangle(imageMat, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0,255,0,255), 5);
+            /*for(int i = rect.y;i <= rect.y+rect.height;i++)
+            {
+                for(int j = rect.x;j <= rect.x+rect.width;j++)
+                {
+                    double[] pixel = imageMat.get(i, j);
+                    double red = pixel[0];
+                    double green = pixel[1];
+                    double blue = pixel[2];
+                    //System.out.println(red+" "+blue+" "+green);
+                    double redIntensity = red/((blue+green)/2);
+                    if(redIntensity > 1.7)
+                    {
+                        red = (green+blue)/2;
+                        pixel[0] = red;
+                        //pixel[1] = 0;
+                        //pixel[2] = 0;
+                    }
+                    imageMat.put(i, j, pixel);
+                    //System.out.println(red+" "+blue+" "+green);
+                }
+            }*/
+        }
+        
+      return  Utility.matToBuffered(imageMat);
+    }
+}
