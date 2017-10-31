@@ -27,39 +27,36 @@ import org.opencv.objdetect.CascadeClassifier;
 public class ObjectDetection {
     public static BufferedImage boxing(BufferedImage image)
     {
-      Mat imageMat = Utility.bufferedToMat(image);
+         Mat imageMat = Utility.bufferedToMat(image);
         Imgproc.cvtColor(imageMat, imageMat, Imgproc.COLOR_RGB2BGR);
-        CascadeClassifier eyeDetector = new CascadeClassifier("classifierWallClock.xml");
+        CascadeClassifier eyeDetector = new CascadeClassifier("classifierWallClock.xml");//for wall clock
         MatOfRect eyeDetections = new MatOfRect();
         eyeDetector.detectMultiScale(imageMat, eyeDetections);
-        
-        
         for(Rect rect : eyeDetections.toArray())
         {
-            Imgproc.rectangle(imageMat, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0,255,0,255), 5);
-            /*for(int i = rect.y;i <= rect.y+rect.height;i++)
-            {
-                for(int j = rect.x;j <= rect.x+rect.width;j++)
-                {
-                    double[] pixel = imageMat.get(i, j);
-                    double red = pixel[0];
-                    double green = pixel[1];
-                    double blue = pixel[2];
-                    //System.out.println(red+" "+blue+" "+green);
-                    double redIntensity = red/((blue+green)/2);
-                    if(redIntensity > 1.7)
-                    {
-                        red = (green+blue)/2;
-                        pixel[0] = red;
-                        //pixel[1] = 0;
-                        //pixel[2] = 0;
-                    }
-                    imageMat.put(i, j, pixel);
-                    //System.out.println(red+" "+blue+" "+green);
-                }
-            }*/
+            Imgproc.rectangle(imageMat, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0,255,0,255), 5);    
         }
-        
+        CascadeClassifier eyeDetector1 = new CascadeClassifier("parojosG.xml");//for eye
+        MatOfRect eyeDetections1 = new MatOfRect();
+        eyeDetector1.detectMultiScale(imageMat, eyeDetections1);
+        for(Rect rect : eyeDetections1.toArray())
+        {
+            Imgproc.rectangle(imageMat, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0,255,0,255), 5);
+        }
+        /*CascadeClassifier eyeDetector2 = new CascadeClassifier("haarcascade.xml");//for pen
+        MatOfRect eyeDetections2 = new MatOfRect();
+        eyeDetector2.detectMultiScale(imageMat, eyeDetections2);
+        for(Rect rect : eyeDetections2.toArray())
+        {
+            Imgproc.rectangle(imageMat, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0,255,0,255), 5);
+        }
+        CascadeClassifier eyeDetector3 = new CascadeClassifier("haarcascade_frontalface_default.xml");//for face
+        MatOfRect eyeDetections3 = new MatOfRect();
+        eyeDetector3.detectMultiScale(imageMat, eyeDetections3);
+        for(Rect rect : eyeDetections3.toArray())
+        {
+            Imgproc.rectangle(imageMat, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0,255,0,255), 5);
+        }*/
       return  Utility.matToBuffered(imageMat);
     }
 }
