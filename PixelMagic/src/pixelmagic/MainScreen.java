@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import org.opencv.core.Core;
 
 
@@ -23,6 +24,23 @@ public class MainScreen extends javax.swing.JFrame {
     public MainScreen() {
         
         initComponents();
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if(!imageSaved){
+                    if (JOptionPane.showConfirmDialog(mainscreen, 
+                        "You have unsaved changes! Save them?", "Really Closing?", 
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                        saveImage();
+                            System.exit(0);
+            
+                    }
+                    else
+                        new File("savedImage.png").delete();
+                }
+            }
+        });
     }
     
     @SuppressWarnings("unchecked")
@@ -583,11 +601,11 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void greenOKButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greenOKButtonActionPerformed
         if(!imageEdited){
-            output = Saturation.greenSaturation(userImage, greenSlider.getValue());
+            output = Saturation.greenSaturation(userImage, greenSLider.getValue());
             imageEdited = true;
         }
         else{
-            output = Saturation.greenSaturation(output, greenSlider.getValue());
+            output = Saturation.greenSaturation(output, greenSLider.getValue());
         }
         outputPreview = Utility.resize(output, 640, 480);
         ImageIcon imageIcon = new ImageIcon(outputPreview);
@@ -649,6 +667,16 @@ public class MainScreen extends javax.swing.JFrame {
                 new MainScreen().setVisible(true);
             }
         });
+    }
+    public void saveImage(){
+        
+            try{
+                File outputImage = new File("savedImage.png");
+                ImageIO.write(output, "png", outputImage);
+            }
+            catch (IOException e){
+                e.printStackTrace();
+            }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
