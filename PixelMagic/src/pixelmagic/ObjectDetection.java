@@ -43,20 +43,6 @@ public class ObjectDetection {
         {
             Imgproc.rectangle(imageMat, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0,255,0,255), 5);
         }
-        /*CascadeClassifier eyeDetector2 = new CascadeClassifier("haarcascade.xml");//for pen
-        MatOfRect eyeDetections2 = new MatOfRect();
-        eyeDetector2.detectMultiScale(imageMat, eyeDetections2);
-        for(Rect rect : eyeDetections2.toArray())
-        {
-            Imgproc.rectangle(imageMat, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0,255,0,255), 5);
-        }
-        CascadeClassifier eyeDetector3 = new CascadeClassifier("haarcascade_frontalface_default.xml");//for face
-        MatOfRect eyeDetections3 = new MatOfRect();
-        eyeDetector3.detectMultiScale(imageMat, eyeDetections3);
-        for(Rect rect : eyeDetections3.toArray())
-        {
-            Imgproc.rectangle(imageMat, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0,255,0,255), 5);
-        }*/
       return  Utility.matToBuffered(imageMat);
     }
 }

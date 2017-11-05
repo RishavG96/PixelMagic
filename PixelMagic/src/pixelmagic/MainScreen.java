@@ -443,9 +443,6 @@ public class MainScreen extends javax.swing.JFrame {
           imageFiltered = false;
         
       }
-      if (rVal == JFileChooser.CANCEL_OPTION) {
-          
-      }
     }//GEN-LAST:event_OpenButtonActionPerformed
 
     private void contrastOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contrastOKActionPerformed
