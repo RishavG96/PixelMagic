@@ -82,8 +82,8 @@ public class Filters {
                 {
                     double[] blend = imageMat.get(i, j);
                     double a = blend[0];
-                    double b = blend[0];
-                    double c = blend[0];
+                    double b = blend[1];
+                    double c = blend[2];
                     a = ((int)a << 8)/(255-mask[0]);
                     if(a>255)a=255;
                     b = ((int)b << 8)/(255-mask[0]);
@@ -106,7 +106,7 @@ public class Filters {
         Imgproc.cvtColor(imageMat,imageMat,Imgproc.COLOR_BGR2HSV);
         return Utility.matToBuffered(imageMat);
     }
-    public static BufferedImage cartoon(BufferedImage image)
+    /*public static BufferedImage cartoon(BufferedImage image)
     {
         int num_bilateral = 7;
         int num_down = 2;
@@ -145,7 +145,7 @@ public class Filters {
         Imgproc.cvtColor(edgeMat, edgeMat, Imgproc.COLOR_GRAY2BGR);
         bitwise_and(bilateralMat,edgeMat,imageMat);
         return Utility.matToBuffered(imageMat);
-    }
+    }*/
     public static BufferedImage inverted(BufferedImage image)
     {
         Mat imageMat = bufferedToMat(image);
@@ -166,7 +166,6 @@ public class Filters {
     public static BufferedImage grayscale(BufferedImage image)
     {
         Mat imageMat = bufferedToMat(image);
-        int sepiaDepth = 20;
         int width = image.getWidth();
         int height = image.getHeight();
         Mat grayScaleMat = new Mat(imageMat.height(),imageMat.width(),CvType.CV_8UC3);

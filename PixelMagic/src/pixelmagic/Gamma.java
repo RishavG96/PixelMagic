@@ -13,7 +13,7 @@ import org.opencv.imgproc.Imgproc;
 
 /**
  *
- * @author mahe
+ * 
  */
 public class Gamma {
     static BufferedImage adjust(BufferedImage image,double gamma)

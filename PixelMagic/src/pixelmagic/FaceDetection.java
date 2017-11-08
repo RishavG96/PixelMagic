@@ -28,7 +28,7 @@ public class FaceDetection {
     {
         Mat imageMat = Utility.bufferedToMat(image);
         Imgproc.cvtColor(imageMat, imageMat, Imgproc.COLOR_RGB2BGR);
-        CascadeClassifier eyeDetector = new CascadeClassifier("parojosG.xml");
+        CascadeClassifier eyeDetector = new CascadeClassifier("parojosG.xml"); 
         MatOfRect eyeDetections = new MatOfRect();
         eyeDetector.detectMultiScale(imageMat, eyeDetections);
         for(Rect rect : eyeDetections.toArray())

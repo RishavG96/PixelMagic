@@ -194,6 +194,11 @@ public class MainScreen extends javax.swing.JFrame {
 
         wierdnessButton.setText("Wierdness");
         wierdnessButton.setToolTipText("");
+        wierdnessButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                wierdnessButtonActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("RED CHANNEL");
 
@@ -634,6 +639,28 @@ public class MainScreen extends javax.swing.JFrame {
         ImageIcon imageIcon = new ImageIcon(outputPreview);
         imageLabel.setIcon(imageIcon);
     }//GEN-LAST:event_allOKButtonActionPerformed
+
+    private void wierdnessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wierdnessButtonActionPerformed
+        // TODO add your handling code here:
+        
+           if(!imageEdited && !imageFiltered){
+            backup = userImage;
+            output = Filters.wierdness(userImage);
+            imageEdited = true;
+            imageFiltered = true;
+        }
+        else if(!imageFiltered){
+            backup = output;
+            output = Filters.wierdness(output);
+            imageFiltered = true;
+        }
+        else{
+            output = Filters.wierdness(backup);
+        }
+        outputPreview = Utility.resize(output, 640, 480);
+        ImageIcon imageIcon = new ImageIcon(outputPreview);
+        imageLabel.setIcon(imageIcon);
+    }//GEN-LAST:event_wierdnessButtonActionPerformed
     public static void main(String args[]) {
          
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
